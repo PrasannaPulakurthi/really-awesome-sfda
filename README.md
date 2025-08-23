@@ -8,7 +8,6 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - [Datasets & Benchmarks](#datasets--benchmarks)
 - [Libraries & Tooling](#libraries--tooling)
 - [Tutorials & Talks](#tutorials--talks)
-- [Related](#related)
 
 ## Papers
 - A Comprehensive Survey on Source-Free Domain Adaptation (TPAMI 2024) [[paper]](https://doi.org/10.1109/tpami.2024.3370978)
