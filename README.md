@@ -1,6 +1,4 @@
-# Awesome Source‑Free Domain Adaptation (SFDA)
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+# Awesome Source‑Free Domain Adaptation (SFDA) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 A curated list of Source‑Free Domain Adaptation (SFDA) resources — methods that adapt using only a trained source model (no source data). See Contributing for how to add papers, code, datasets, and tutorials.
 
