@@ -40,8 +40,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md). Use this entry format:
 ```
 - Title (Venue/Year) [[paper](https://example.com/paper)] [[code](https://example.com/code)] [[project](https://example.com/site)]
 ```
-
-For arXiv links, use `[[arxiv](https://arxiv.org/abs/...)]` instead of `[[paper](...)]`.
-
-Sorting policy:
-- Sort entries alphabetically by title within each section.
