@@ -54,3 +54,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md). Use this entry format:
 ```
 - Title (Venue/Year) [[paper](https://example.com/paper)] [[code](https://example.com/code)] [[project](https://example.com/site)]
 ```
+
+Sorting policy:
+- Sort entries alphabetically by title within each section.
