@@ -1,0 +1,25 @@
+name: Add resource
+description: Request adding a paper/code/tutorial
+labels: [addition]
+body:
+  - type: input
+    id: title
+    attributes: { label: Title, placeholder: Paper or resource title }
+    validations: { required: true }
+  - type: input
+    id: paper
+    attributes: { label: Paper link (arXiv/DOI), placeholder: https:// }
+  - type: input
+    id: code
+    attributes: { label: Code link (optional), placeholder: https://github.com/... }
+  - type: textarea
+    id: summary
+    attributes: { label: One‑sentence summary }
+    validations: { required: true }
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      options: [Surveys, Methods — Closed‑set, Methods — Open‑set/Partial/Universal, Tasks — Image Classification, Tasks — Semantic Segmentation, Datasets & Benchmarks, Libraries & Tooling, Tutorials & Talks]
+    validations: { required: true }
+
