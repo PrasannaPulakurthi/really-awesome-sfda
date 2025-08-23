@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --verbose --no-progress --timeout 20s README.md
+          args: --verbose --no-progress --timeout 20s README.md CONTRIBUTING.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
