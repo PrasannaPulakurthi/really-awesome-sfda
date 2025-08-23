@@ -3,7 +3,8 @@
 Thanks for helping improve Awesome SFDA!
 
 ## Entry rules
-- Use: `- [Title (Venue/Year)](paper) — one sentence. [code](repo)`
+- Use: `- Title (Venue/Year) [paper](link) — one sentence. [code](repo)`
+- For arXiv links, use `[arxiv](https://arxiv.org/abs/...)` instead of `[paper](...)`.
 - Keep one concise sentence; avoid marketing language.
 - Prefer official code; otherwise note "reproduction".
 - Place entries under the most specific section; avoid duplicates.
