@@ -11,7 +11,6 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 
 ## Papers
 ### 2024
-## 2024
 
 - A Comprehensive Survey on Source-Free Domain Adaptation (TPAMI 2024)  
   [[Paper](https://ieeexplore.ieee.org/document/10533539)] [[arXiv](https://arxiv.org/abs/2302.11803)]
