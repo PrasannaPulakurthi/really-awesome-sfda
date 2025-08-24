@@ -26,7 +26,7 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - Shuffle PatchMix Augmentation with Confidence-Margin Weighted Pseudo-Labels for Enhanced Source-Free Domain Adaptation (ICIP 2025) [[arxiv](https://arxiv.org/abs/2505.24216)] [[code](https://github.com/PrasannaPulakurthi/SPM)]
 - Source-free Video Domain Adaptation by Learning from Noisy Labels (Pattern Recognition 2025) [[paper](https://www.sciencedirect.com/science/article/abs/pii/S0031320324010793)] [[code](https://github.com/avijit9/CleanAdapt)]
 - Unraveling the Mysteries of Label Noise in Source-Free Domain Adaptation: Theory and Practice (TPAMI 2025) [[paper](https://www.computer.org/csdl/journal/tp/2025/05/10858421/23VPxGAlL4Q)] [[code](https://github.com/xugezheng/labelNoiseInSFDA)]
-- VP-SFDA: Visual Prompt Source-Free Domain Adaptation for Cross-Modal Medical Image Segmentation (Health Data Science 2025) [[paper](https://academic.oup.com/hdsr/article/7/1/2025/7688831)]
+- VP-SFDA: Visual Prompt Source-Free Domain Adaptation for Cross-Modal Medical Image Segmentation (Health Data Science 2025) [[paper](https://spj.science.org/doi/10.34133/hds.0143)]
 
 ### 2024
 - A Comprehensive Survey on Source-Free Domain Adaptation (TPAMI 2024) [[paper](https://ieeexplore.ieee.org/document/10533539)] [[arxiv](https://arxiv.org/abs/2302.11803)]
