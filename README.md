@@ -55,7 +55,8 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 ## Datasets & Benchmarks
 - DomainNet — multi‑domain classification benchmark.
 - Office‑31 / Office‑Home — classic DA suites, widely reused in SFDA.
-- VisDA‑2017 — synthetic→real; used by SFDA methods.
+- VisDA‑C — synthetic→real; used by SFDA methods.
+- PACS.
 
 ## Libraries & Tooling
 - Add libraries and tooling here.
