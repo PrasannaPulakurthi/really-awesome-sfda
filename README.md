@@ -53,10 +53,15 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - Visually Source-Free Domain Adaptation via Adversarial Style Matching (TIP 2024) [[paper](https://ieeexplore.ieee.org/document/10410236)]
 
 ## Datasets & Benchmarks
-- DomainNet — multi‑domain classification benchmark.
-- Office‑31 / Office‑Home — classic DA suites, widely reused in SFDA.
-- VisDA‑C — synthetic→real; used by SFDA methods.
-- PACS.
+- [Office-31](https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA)
+- [Office-Home](https://drive.google.com/file/d/0B81rNlvomiwed0V1YUxQdC1uOTg/view)
+- [VISDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification)
+- [DomainNet (cleaned)](http://ai.bu.edu/M3SDA/)
+- [PACS](https://domaingeneralization.github.io/)
+- [ImageNet-A](https://github.com/hendrycks/natural-adv-examples)
+- [ImageNet-R](https://github.com/hendrycks/imagenet-r)
+- [ImageNet-V2](https://huggingface.co/datasets/vaishaal/ImageNetV2/tree/main)
+- [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
 ## Libraries & Tooling
 - Add libraries and tooling here.
