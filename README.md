@@ -54,7 +54,7 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 
 ## Datasets & Benchmarks
 - [Office-31](https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA)
-- [Office-Home](https://drive.google.com/file/d/0B81rNlvomiwed0V1YUxQdC1uOTg/view)
+- [Office-Home](https://www.hemanthdv.org/officeHomeDataset.html)
 - [VISDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification)
 - [DomainNet (cleaned)](http://ai.bu.edu/M3SDA/)
 - [PACS](https://domaingeneralization.github.io/)
