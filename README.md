@@ -11,7 +11,7 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 
 ## Papers
 ### 2025
-- AIF-SFDA: Autonomous Information Filter-driven Source-Free Domain Adaptation for Medical Image Segmentation (AAAI 2025) [[arxiv](https://arxiv.org/abs/2408.05038)] [[code](https://github.com/hust-ljx/AIF-SFDA)]
+- AIF-SFDA: Autonomous Information Filter-driven Source-Free Domain Adaptation for Medical Image Segmentation (AAAI 2025) [[arxiv](https://arxiv.org/abs/2501.03074)] [[code](https://github.com/JingHuaMan/AIF-SFDA)]
 - Distinguish Then Exploit: Source-free Open Set Domain Adaptation via Weight Barcode Estimation and Sparse Label Assignment (CVPR 2025) [[paper](https://openaccess.thecvf.com/content/CVPR2025/html/Liu_Distinguish_Then_Exploit_Source-free_Open_Set_Domain_Adaptation_via_Weight_CVPR_2025_paper.html)] [[pdf](https://openaccess.thecvf.com/content/CVPR2025/papers/Liu_Distinguish_Then_Exploit_Source-free_Open_Set_Domain_Adaptation_via_Weight_CVPR_2025_paper.pdf)]
 - Effective dual-region augmentation for reduced reliance on large amounts of labeled data (2025) [[paper](https://doi.org/10.1117/12.3058627)] [[code](https://github.com/PrasannaPulakurthi/Foreground-Background-Augmentation)]
 - ElimPCL: Eliminating Noise Accumulation with Progressive Curriculum Labeling for Source-Free Domain Adaptation (arXiv 2025) [[arxiv](https://arxiv.org/abs/2503.23712)]
