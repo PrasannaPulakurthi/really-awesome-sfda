@@ -29,7 +29,7 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - VP-SFDA: Visual Prompt Source-Free Domain Adaptation for Cross-Modal Medical Image Segmentation (Health Data Science 2025) [[paper](https://spj.science.org/doi/10.34133/hds.0143)]
 
 ### 2024
-- A Comprehensive Survey on Source-Free Domain Adaptation (TPAMI 2024) [[paper](https://ieeexplore.ieee.org/document/10533539)] [[arxiv](https://arxiv.org/abs/2302.11803)]
+- A Comprehensive Survey on Source-Free Domain Adaptation (TPAMI 2024) [[paper](https://ieeexplore.ieee.org/document/10452835)] [[arxiv](https://arxiv.org/abs/2302.11803)]
 - Aligning Non-Causal Factors for Transformer-Based Source-Free Domain Adaptation (WACV 2024) [[paper](https://openaccess.thecvf.com/content/WACV2024/html/Sanyal_Aligning_Non-Causal_Factors_for_Transformer-Based_Source-Free_Domain_Adaptation_WACV_2024_paper.html)]
 - De-Confusing Pseudo-Labels in Source-Free Domain Adaptation (ECCV 2024) [[paper](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/04967.pdf)] [[arxiv](https://arxiv.org/abs/2401.01650)] [[code](https://github.com/ssi-research/DCPL_SFDA)]
 - EventDance: Unsupervised Source-free Cross-modal Adaptation for Event-based Object Recognition (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Zheng_EventDance_Unsupervised_Source-free_Cross-modal_Adaptation_for_Event-based_Object_Recognition_CVPR_2024_paper.html)] [[code](https://github.com/zhengxujosh/EventDance)]
