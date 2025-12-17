@@ -6,13 +6,13 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 ## Contents
 - [Papers](#papers)
 - [Datasets & Benchmarks](#datasets--benchmarks)
-- [Libraries & Tooling](#libraries--tooling)
-- [Tutorials & Talks](#tutorials--talks)
 
 ## Papers
 ### 2025
 - AIF-SFDA: Autonomous Information Filter-driven Source-Free Domain Adaptation for Medical Image Segmentation (AAAI 2025) [[arxiv](https://arxiv.org/abs/2501.03074)] [[code](https://github.com/JingHuaMan/AIF-SFDA)]
 - Distinguish Then Exploit: Source-free Open Set Domain Adaptation via Weight Barcode Estimation and Sparse Label Assignment (CVPR 2025) [[paper](https://openaccess.thecvf.com/content/CVPR2025/html/Liu_Distinguish_Then_Exploit_Source-free_Open_Set_Domain_Adaptation_via_Weight_CVPR_2025_paper.html)] [[pdf](https://openaccess.thecvf.com/content/CVPR2025/papers/Liu_Distinguish_Then_Exploit_Source-free_Open_Set_Domain_Adaptation_via_Weight_CVPR_2025_paper.pdf)]
+- Diffusion-Driven Progressive Target Manipulation for Source-Free Domain Adaptation (NeurIPS 2025) [[arxiv](https://arxiv.org/abs/2510.25279)]
+- Distinguish Then Exploit: Source-free Open Set Domain Adaptation via Weight Barcode Estimation and Sparse Label Assignment (CVPR 2025) [[paper]
 - Effective dual-region augmentation for reduced reliance on large amounts of labeled data (2025) [[paper](https://doi.org/10.1117/12.3058627)] [[arxiv]](https://arxiv.org/abs/2504.13077) [[code](https://github.com/PrasannaPulakurthi/Foreground-Background-Augmentation)]
 - ElimPCL: Eliminating Noise Accumulation with Progressive Curriculum Labeling for Source-Free Domain Adaptation (arXiv 2025) [[arxiv](https://arxiv.org/abs/2503.23712)]
 - Label Calibration in Source Free Domain Adaptation (WACV 2025) [[paper](https://openaccess.thecvf.com/content/WACV2025/html/Rai_Label_Calibration_in_Source_Free_Domain_Adaptation_WACV_2025_paper.html)] [[arxiv](https://arxiv.org/abs/2501.07072)]
@@ -45,12 +45,39 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - SFDA with Diffusion-Guided Source Data Generation (arXiv 2024) [[paper](https://arxiv.org/abs/2402.04929)]
 - SFDA with Frozen Multimodal Foundation Model (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Tang_Source-Free_Domain_Adaptation_with_Frozen_Multimodal_Foundation_Model_CVPR_2024_paper.pdf)] [[arxiv](https://arxiv.org/abs/2311.16510)]
 - Simplifying Source-Free Domain Adaptation for Object Detection (ECCV 2024) [[paper](https://link.springer.com/chapter/10.1007/978-3-031-72949-2_12)] [[arxiv](https://arxiv.org/abs/2407.07586)] [[code](https://github.com/EPFL-IMOS/simple-SFOD)]
+- Source-Free Domain Adaptation with Frozen Multimodal Foundation Model (CVPR 2024) [[arxiv]](https://arxiv.org/abs/2311.16510) [[code]](https://github.com/tntek/source-free-domain-adaptation)
 - Stable Neighbor Denoising for Source-free Domain Adaptive Segmentation (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Zhao_Stable_Neighbor_Denoising_for_Source-free_Domain_Adaptive_Segmentation_CVPR_2024_paper.pdf)] [[arxiv](https://arxiv.org/abs/2406.06813)] [[code](https://github.com/DZhaoXd/SND)]
 - Towards Stable and Robust Source-free Unsupervised 3D Semantic Segmentation (ECCV 2024) [[paper](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02968.pdf)]
 - Uncertainty-Aware Source-Free Adaptive Image Super-Resolution with Wavelet Augmentation Transformer (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Ai_Uncertainty-Aware_Source-Free_Adaptive_Image_Super-Resolution_with_Wavelet_Augmentation_Transformer_CVPR_2024_paper.pdf)] [[arxiv](https://arxiv.org/abs/2303.17783)] [[code](https://github.com/shallowdream204/SODA-SR)]
 - Understanding and Improving Source-free Domain Adaptation from a Theoretical Perspective (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/html/Mitsuzumi_Understanding_and_Improving_Source-free_Domain_Adaptation_from_a_Theoretical_Perspective_CVPR_2024_paper.html)] [[code](https://github.com/nttcslab/improved_sfda)]
 - Unveiling the Unknown: Unleashing the Power of Unknown to Known in Open-Set Source-Free Domain Adaptation (CVPR 2024) [[paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Wan_Unveiling_the_Unknown_Unleashing_the_Power_of_Unknown_to_Known_CVPR_2024_paper.pdf)] [[code](https://github.com/xdwfl/UPUK)]
 - Visually Source-Free Domain Adaptation via Adversarial Style Matching (TIP 2024) [[paper](https://ieeexplore.ieee.org/document/10410236)]
+
+### 2023
+- Bidirectional Alignment for Domain Adaptive Detection with Transformers (ICCV 2023) [[paper](https://openaccess.thecvf.com/content/ICCV2023/html/He_Bidirectional_Alignment_for_Domain_Adaptive_Detection_with_Transformers_ICCV_2023_paper.html)] [[code]](https://github.com/helq2612/biADT)
+- Class Relationship Embedded Learning for Source-Free Unsupervised Domain Adaptation (CVPR 2023) [[paper](https://openaccess.thecvf.com/content/CVPR2023/html/Zhang_Class_Relationship_Embedded_Learning_for_Source-Free_Unsupervised_Domain_Adaptation_CVPR_2023_paper.html)][[code]](https://github.com/zhyx12/CRCo)
+- CoSDA: Continual Source-Free Domain Adaptation (ICLR 2023) [[arxiv](https://arxiv.org/abs/2304.06627)]
+- DELTA: Degradation-Free Fully Test-Time Adaptation (ICLR 2023) [[arxiv](https://arxiv.org/abs/2301.13018)] 
+- Prior-guided Source-free Domain Adaptation for Human Pose Estimation (ICCV 2023) [[paper](https://openaccess.thecvf.com/content/ICCV2023/html/Raychaudhuri_Prior-guided_Source-free_Domain_Adaptation_for_Human_Pose_Estimation_ICCV_2023_paper.html)]
+- Rethinking the Role of Pre-Trained Networks in Source-Free Domain Adaptation (ICCV 2023) [[paper](https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_Rethinking_the_Role_of_Pre-Trained_Networks_in_Source-Free_Domain_Adaptation_ICCV_2023_paper.html)]
+- Source-Free Video Domain Adaptation With Spatial-Temporal-Historical Consistency Learning (CVPR 2023) [[paper](https://openaccess.thecvf.com/content/CVPR2023/html/Li_Source-Free_Video_Domain_Adaptation_With_Spatial-Temporal-Historical_Consistency_Learning_CVPR_2023_paper.html)]
+- SSDA: Secure Source-Free Domain Adaptation (ICCV 2023) [[paper](https://openaccess.thecvf.com/content/ICCV2023/html/Ahmed_SSDA_Secure_Source-Free_Domain_Adaptation_ICCV_2023_paper.html)] [[code](https://github.com/ML-Security-Research-LAB/SSDA)]
+- When Source-Free Domain Adaptation Meets Learning with Noisy Labels (ICLR 2023) [[arxiv](https://arxiv.org/abs/2301.13381)] [[code](https://github.com/liyi01827/SFDA_LLN)]
+
+### 2022
+- Adaptive Contrastive Learning with Label Consistency for Source Data Free Unsupervised Domain Adaptation (Sensors (Basel) 2022) [[paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9185254/)]
+- Attracting and Dispersing: A Simple Approach for Source-free Domain Adaptation (AaD) (NeurIPS 2022) [[arxiv](https://arxiv.org/abs/2205.04183)] [[code](https://github.com/Albert0147/AaD_SFDA)]
+- Contrastive Test-Time Adaptation (CVPR 2022) [[paper]](https://openaccess.thecvf.com/content/CVPR2022/html/Chen_Contrastive_Test-Time_Adaptation_CVPR_2022_paper.html) [[code]](https://github.com/DianCh/AdaContrast)
+- Continual Test-Time Domain Adaptation (CoTTA) (CVPR 2022) [[paper](https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Continual_Test-Time_Domain_Adaptation_CVPR_2022_paper.html)] [[code](https://github.com/qinenergy/cotta)]
+- Divide and Contrast: Source-free Domain Adaptation via Adaptive Contrastive Learning (DaC) (NeurIPS 2022) [[arxiv](https://arxiv.org/abs/2211.06612)] [[code](https://github.com/ZyeZhang/DaC)]
+- Efficient Test-Time Model Adaptation without Forgetting (EATA) (ICML 2022) [[paper](https://proceedings.mlr.press/v162/niu22a.html)] [[code](https://github.com/mr-eggplant/EATA)]
+- Exploring Domain-Invariant Parameters for Source Free Domain Adaptation (CVPR 2022) [[paper](https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Exploring_Domain-Invariant_Parameters_for_Source_Free_Domain_Adaptation_CVPR_2022_paper.html)]
+- Instance Relation Graph Guided Source-Free Domain Adaptive Object Detection (CVPR 2022) [[arxiv](https://arxiv.org/abs/2203.15793)] [[code](https://github.com/Vibashan/irg-sfda)]
+- Learning to Generate Novel Domains for Source-Free Domain Generalization (ECCV 2022) [[arxiv](https://arxiv.org/abs/2007.03304)]
+- Model Adaptation: Historical Contrastive Learning for Unsupervised Domain Adaptation without Source Data (HCL) (NeurIPS 2022) [[arxiv](https://arxiv.org/abs/2110.03374)]
+- Source-Free Domain Adaptation via Distribution Estimation (SFDA-DE) (CVPR 2022) [[arxiv](https://arxiv.org/abs/2204.11257)]
+- Source-free Video Domain Adaptation by Learning Temporal Consistency for Action Recognition (ATCoN) (ECCV 2022) [[arxiv](https://arxiv.org/abs/2203.04559)] [[code](https://github.com/xuyu0010/ATCoN)]
+
 
 ## Datasets & Benchmarks
 - [Office-31](https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA)
@@ -63,12 +90,6 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - [ImageNet-V2](https://huggingface.co/datasets/vaishaal/ImageNetV2/tree/main)
 - [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
-## Libraries & Tooling
-- Add libraries and tooling here.
-
-## Tutorials & Talks
-- Add tutorials and talks here.
-
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md). Use this entry format:
 
@@ -76,5 +97,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md). Use this entry format:
 - Title (Venue/Year) [[paper](https://example.com/paper)] [[code](https://example.com/code)] [[project](https://example.com/site)]
 ```
 
-Sorting policy:
-- Sort entries alphabetically by title within each section.
