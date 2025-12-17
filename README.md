@@ -90,9 +90,8 @@ Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt
 - [ImageNet-V2](https://huggingface.co/datasets/vaishaal/ImageNetV2/tree/main)
 - [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md). Use this entry format:
-
+## Contribution
+If you have published a high-quality paper or come across one that you think is valuable, feel free to contribute! To submit a paper, please open an issue and include the following information in the specified format:
 ```
 - Title (Venue/Year) [[paper](https://example.com/paper)] [[code](https://example.com/code)] [[project](https://example.com/site)]
 ```
