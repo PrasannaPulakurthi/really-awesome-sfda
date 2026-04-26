@@ -37,13 +37,14 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 ## Applications
 
 ### Image Classification
-- Diffusion-Driven Progressive Target Manipulation for Source-Free Domain Adaptation (NeurIPS 2025) [[arxiv](https://arxiv.org/abs/2510.25279)]
+- CCST: Cross-Modal and Consistency-Aware Self-Training for Source-Free Unsupervised Domain Adaptation in Speech Recognition (ICASSP 2026) [[paper](https://ieeexplore.ieee.org/abstract/document/11461841)]
+- Shuffle PatchMix Augmentation with Confidence-Margin Weighted Pseudo-Labels for Enhanced Source-Free Domain Adaptation (ICIP 2025) [[paper](https://ieeexplore.ieee.org/document/11084606)] [[arxiv](https://arxiv.org/abs/2505.24216)] [[code](https://github.com/PrasannaPulakurthi/SPM)]
 - Effective dual-region augmentation for reduced reliance on large amounts of labeled data (2025) [[paper](https://doi.org/10.1117/12.3058627)] [[arxiv](https://arxiv.org/abs/2504.13077)] [[code](https://github.com/PrasannaPulakurthi/Foreground-Background-Augmentation)]
+- Diffusion-Driven Progressive Target Manipulation for Source-Free Domain Adaptation (NeurIPS 2025) [[arxiv](https://arxiv.org/abs/2510.25279)]
 - Label Calibration in Source Free Domain Adaptation (WACV 2025) [[paper](https://openaccess.thecvf.com/content/WACV2025/html/Rai_Label_Calibration_in_Source_Free_Domain_Adaptation_WACV_2025_paper.html)] [[arxiv](https://arxiv.org/abs/2501.07072)]
 - Proxy Denoising for Source-Free Domain Adaptation (ICLR 2025) [[paper](https://openreview.net/forum?id=FIj9IEPCKr)] [[arxiv](https://arxiv.org/abs/2406.01658)]
 - Revisiting Source-Free Domain Adaptation: a New Perspective via Uncertainty Control (ICLR 2025) [[paper](https://openreview.net/pdf?id=nx9Z5Kva96)] [[code](https://github.com/xugezheng/UCon_SFDA)]
 - Revisiting Source-Free Domain Adaptation: Insights into Representativeness, Generalization, and Variety (CVPR 2025) [[paper](https://openaccess.thecvf.com/content/CVPR2025/html/Zhu_Revisiting_Source-Free_Domain_Adaptation_Insights_into_Representativeness_Generalization_and_Variety_CVPR_2025_paper.html)]
-- Shuffle PatchMix Augmentation with Confidence-Margin Weighted Pseudo-Labels for Enhanced Source-Free Domain Adaptation (ICIP 2025) [[paper](https://ieeexplore.ieee.org/document/11084606)] [[arxiv](https://arxiv.org/abs/2505.24216)] [[code](https://github.com/PrasannaPulakurthi/SPM)]
 - Aligning Non-Causal Factors for Transformer-Based Source-Free Domain Adaptation (WACV 2024) [[paper](https://openaccess.thecvf.com/content/WACV2024/html/Sanyal_Aligning_Non-Causal_Factors_for_Transformer-Based_Source-Free_Domain_Adaptation_WACV_2024_paper.html)]
 - GALA: Graph Diffusion-based Alignment with Jigsaw for Source-free Domain Adaptation (TPAMI 2024) [[paper](https://ieeexplore.ieee.org/document/10561561)]
 - Hierarchical Unsupervised Relation Distillation for Source-Free Domain Adaptation (ECCV 2024) [[paper](https://eccv.ecva.net/virtual/2024/poster/1198)]
