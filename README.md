@@ -147,7 +147,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - VFM-Guided Semi-Supervised Detection Transformer under Source-Free Constraints for Remote Sensing Object Detection (arXiv 2025) [[arxiv](https://arxiv.org/abs/2508.11167)]
 
 ### Landmine Detection
-- SULAND v2: A Refined RGB Dataset and Deep Learning Object Detection Benchmark for UAV/UGV-Based SUrface LANDmine Detection Under Domain Shift (arXiv 2026) [[arxiv](https://arxiv.org/abs/2607.28996)] [[dataset](https://huggingface.co/datasets/SagarLekhak/SULAND_v2_RGB_Surface_Landmine_Dataset)]
+- SULAND v2: A Refined RGB Dataset and Deep Learning Object Detection Benchmark for UAV/UGV-Based SUrface LANDmine Detection Under Domain Shift (arXiv 2026) [[arxiv](https://arxiv.org/abs/2607.28996)] [[dataset](https://huggingface.co/datasets/SagarLekhak/SULAND_v2_RGB_Surface_Landmine_Dataset)][[code]](https://github.com/PrasannaPulakurthi/SULAND_v2)
 
 ### 3D / Point Cloud
 - Source-Free Domain Adaptation for Geospatial Point Cloud Semantic Segmentation (arXiv 2026) [[arxiv](https://arxiv.org/abs/2601.08375)]
