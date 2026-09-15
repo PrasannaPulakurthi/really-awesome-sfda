@@ -136,6 +136,67 @@ def changed_lines_from_git(base, path):
     return lines
 
 
+# Matches a venue tag in either the current `Venue'YY` form or the older
+# (Venue YYYY) form, so a signature can be compared across the format change.
+ANY_VENUE_RE = re.compile(r"`(?P<v1>[^`']+)'(?P<y1>\d{2})`|\((?P<v2>[^()]+?)\s+(?P<y2>(?:19|20)\d{2})\)")
+ANY_URL_RE = re.compile(r"\((?P<url>https?://[^)\s]+)\)")
+# A star badge carries a github.com link target of its own. Left in, adding a
+# badge to an existing entry would look like a changed citation.
+BADGE_ANY_RE = re.compile(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)")
+BULLET_RE = re.compile(r"^-\s+(?P<rest>.+)$")
+
+
+def citation_signature(line):
+    """What a citation actually asserts, independent of how it is formatted.
+
+    Two lines with the same signature make the same factual claim, so a change
+    between them is cosmetic and does not need re-verification.
+    """
+    m = BULLET_RE.match(line)
+    if not m:
+        return None
+    line = BADGE_ANY_RE.sub("", line)
+    m = BULLET_RE.match(line)
+    if not m:
+        return None
+    urls = tuple(sorted(u for u in ANY_URL_RE.findall(line)
+                        if "img.shields.io" not in u))
+    if not urls:
+        return None
+    vm = ANY_VENUE_RE.search(line)
+    venue = ""
+    if vm:
+        if vm.group("v1"):
+            venue = "%s %s" % (vm.group("v1").strip(), vm.group("y1"))
+        else:
+            venue = "%s %s" % (vm.group("v2").strip(), vm.group("y2")[2:])
+    # Title with links, tags, badges and the venue stripped, so wording is
+    # compared but formatting is not. The venue must go too: in the older
+    # format it sat inside the title text, and leaving it there makes every
+    # entry look changed across the format migration.
+    text = ANY_URL_RE.sub("", m.group("rest"))
+    text = ANY_VENUE_RE.sub("", text)
+    text = re.sub(r"\[[^\]]*\]|`[^`]*`|!\[[^\]]*\]", "", text)
+    text = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    return (text, urls, venue)
+
+
+def unchanged_signatures(base, path):
+    """Citation signatures present in `path` at revision `base`."""
+    try:
+        old = subprocess.run(["git", "show", "%s:%s" % (base, path)],
+                             capture_output=True, text=True, check=True).stdout
+    except Exception as exc:
+        sys.stderr.write("could not read %s at %s: %s\n" % (path, base, exc))
+        return set()
+    sigs = set()
+    for line in old.splitlines():
+        sig = citation_signature(line)
+        if sig:
+            sigs.add(sig)
+    return sigs
+
+
 def fetch(url, timeout=30, accept=None):
     """Return (body, error_code).
 
@@ -476,8 +537,22 @@ def main():
     if args.only:
         entries = [e for e in entries if args.only.lower() in e.title.lower()]
     if args.diff_base:
-        wanted = changed_lines_from_git(args.diff_base, args.readme)
-        entries = [e for e in entries if e.line_no in wanted] if wanted else []
+        # Select by what the citation asserts, not by which lines moved. A
+        # reformatting pass changes every line while changing no citation, and
+        # re-verifying the whole list for that is slow enough that people
+        # eventually turn the check off.
+        known = unchanged_signatures(args.diff_base, args.readme)
+        lines = text.splitlines()
+        keep = []
+        for e in entries:
+            sig = citation_signature(lines[e.line_no - 1])
+            if sig is None or sig not in known:
+                keep.append(e)
+        skipped = len(entries) - len(keep)
+        if skipped:
+            sys.stderr.write("%d entries unchanged since %s - not re-verified\n"
+                             % (skipped, args.diff_base[:8]))
+        entries = keep
     if args.limit:
         entries = entries[:args.limit]
 
