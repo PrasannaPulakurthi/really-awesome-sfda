@@ -126,7 +126,8 @@ def changed_lines_from_git(base, path):
     try:
         out = subprocess.run(
             ["git", "diff", "--unified=0", base + "...HEAD", "--", path],
-            capture_output=True, text=True, check=True).stdout
+            capture_output=True, text=True, check=True,
+                             encoding="utf-8").stdout
     except Exception as exc:
         sys.stderr.write("git diff failed: %s\n" % exc)
         return set()
@@ -188,7 +189,8 @@ def unchanged_signatures(base, path):
     """Citation signatures present in `path` at revision `base`."""
     try:
         old = subprocess.run(["git", "show", "%s:%s" % (base, path)],
-                             capture_output=True, text=True, check=True).stdout
+                             capture_output=True, text=True, check=True,
+                             encoding="utf-8").stdout
     except Exception as exc:
         sys.stderr.write("could not read %s at %s: %s\n" % (path, base, exc))
         return set()
