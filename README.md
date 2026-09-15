@@ -226,6 +226,12 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 ## Settings & Extensions
 
 ### Test-Time Adaptation (TTA)
+- Test-Time Adaptation by Causal Trimming [`arxiv`](https://arxiv.org/abs/2510.11133) [`code`](https://github.com/NancyQuris/TACT) `NeurIPS'25` [![Stars](https://img.shields.io/github/stars/NancyQuris/TACT?style=social)](https://github.com/NancyQuris/TACT)
+- Backpropagation-Free Test-Time Adaptation via Probabilistic Gaussian Alignment [`paper`](https://neurips.cc/virtual/2025/poster/115767) [`code`](https://github.com/AIM-SKKU/ADAPT) `NeurIPS'25` [![Stars](https://img.shields.io/github/stars/AIM-SKKU/ADAPT?style=social)](https://github.com/AIM-SKKU/ADAPT)
+- Cross-Device Collaborative Test-Time Adaptation [`paper`](https://proceedings.neurips.cc/paper_files/paper/2024/file/de0e668df3fe63ec89e5a7e68f3d350f-Paper-Conference.pdf) [`code`](https://github.com/Cascol-Chen/COLA) `NeurIPS'24` [![Stars](https://img.shields.io/github/stars/Cascol-Chen/COLA?style=social)](https://github.com/Cascol-Chen/COLA)
+- PCoTTA: Continual Test-Time Adaptation for Multi-Task Point Cloud Understanding [`arxiv`](https://arxiv.org/abs/2411.00632) [`code`](https://github.com/Jinec98/PCoTTA) `NeurIPS'24` [![Stars](https://img.shields.io/github/stars/Jinec98/PCoTTA?style=social)](https://github.com/Jinec98/PCoTTA)
+- L-TTA: Lightweight Test-Time Adaptation Using a Versatile Stem Layer [`paper`](https://proceedings.neurips.cc/paper_files/paper/2024/file/458d9f2dd5c7565af60143630dc62f10-Paper-Conference.pdf) `NeurIPS'24`
+- Protected Test-Time Adaptation via Online Entropy Matching: A Betting Approach [`paper`](https://neurips.cc/virtual/2024/poster/93486) `NeurIPS'24`
 - Discriminator-Guided Adaptive Diffusion for Source-Free Test-Time Adaptation under Image Corruptions [`arxiv`](https://arxiv.org/abs/2604.23636) `ICPR'26`
 - Distill Once, Adapt Life-Long: Exploring Dataset Distillation for Continual Test-Time Adaptation [`arxiv`](https://arxiv.org/abs/2606.20196) `ECCV'26`
 - Source-Free Controlled Adaptation of Teachers for Continual Test-Time Adaptation [`arxiv`](https://arxiv.org/abs/2607.23735) `arXiv'26`
@@ -262,6 +268,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - CoSDA: Continual Source-Free Domain Adaptation [`arxiv`](https://arxiv.org/abs/2304.06627) `ICLR'23`
 
 ### Multi-Source SFDA
+- Agile Multi-Source-Free Domain Adaptation [`paper`](https://ojs.aaai.org/index.php/AAAI/article/view/29272) `AAAI'24`
 - Selection, Ensemble, and Adaptation: Advancing Multi-Source-Free Domain Adaptation via Architecture Zoo [`paper`](https://doi.org/10.1109/TPAMI.2025.3593943) `TPAMI'25`
 - SepRep-Net: Multi-source Free Domain Adaptation via Model Separation and Reparameterization [`paper`](https://arxiv.org/abs/2402.08249) `arXiv'24`
 - Discriminability and Transferability Estimation: A Bayesian Source Importance Estimation Approach for Multi-Source-Free Domain Adaptation [`paper`](https://doi.org/10.1609/aaai.v37i6.25946) `AAAI'23`
@@ -301,9 +308,12 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - Prompt as Free Lunch: Enhancing Diversity in Source-Free Cross-domain Few-shot Learning through Semantic-Guided Prompting [`arxiv`](https://arxiv.org/abs/2412.00767) `arXiv'24`
 
 ### Cross-Modal SFDA
+- Test-Time Selective Adaptation for Uni-Modal Distribution Shift in Multi-Modal Data [`paper`](https://icml.cc/virtual/2025/poster/46389) [`code`](https://github.com/chenmc1996/Uni-Modal-Distribution-Shift) `ICML'25` [![Stars](https://img.shields.io/github/stars/chenmc1996/Uni-Modal-Distribution-Shift?style=social)](https://github.com/chenmc1996/Uni-Modal-Distribution-Shift)
 - EventDance: Unsupervised Source-free Cross-modal Adaptation for Event-based Object Recognition [`paper`](https://openaccess.thecvf.com/content/CVPR2024/papers/Zheng_EventDance_Unsupervised_Source-free_Cross-modal_Adaptation_for_Event-based_Object_Recognition_CVPR_2024_paper.pdf) [`code`](https://github.com/zhengxujosh/EventDance) `CVPR'24` [![Stars](https://img.shields.io/github/stars/zhengxujosh/EventDance?style=social)](https://github.com/zhengxujosh/EventDance)
 
 ### Foundation Models / VLM-based
+- Training-Free Test-Time Adaptation via Shape and Style Guidance for Vision-Language Models [`paper`](https://papers.nips.cc/paper_files/paper/2025/hash/e07ad202df8672e3cf9d0203d86f5a55-Abstract-Conference.html) `NeurIPS'25`
+- Towards Dynamic-Prompting Collaboration for Source-Free Domain Adaptation [`paper`](https://doi.org/10.24963/ijcai.2024/182) `IJCAI'24`
 - Closing the Confusion Loop: CLIP-Guided Alignment for Source-Free Domain Adaptation [`arxiv`](https://arxiv.org/abs/2602.08730) `arXiv'26`
 - Data-Efficient CLIP-Powered Dual-Branch Networks for Source-Free Unsupervised Domain Adaptation [`arxiv`](https://arxiv.org/abs/2410.15811) `Expert Systems with Applications'26`
 - Empowering Source-Free Domain Adaptation via MLLM-Guided Reliability-Based Curriculum Learning [`paper`](https://doi.org/10.1109/WACV61042.2026.00415) `WACV'26`
