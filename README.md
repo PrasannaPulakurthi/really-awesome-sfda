@@ -342,13 +342,43 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 
 ## Datasets & Benchmarks
 
+Before comparing any two published numbers, check that they were produced the
+same way. Most apparent contradictions in this literature come from protocol
+differences rather than from method quality.
+
+**Backbone matters more than the method, often.** Office-31 and Office-Home
+results are usually ResNet-50, VisDA-C usually ResNet-101, and a paper switching
+to a ViT or a CLIP initialisation will beat the field on backbone alone. Check
+what was used before attributing a gain to the adaptation.
+
+**VisDA-C is reported as per-class mean, not overall accuracy.** The classes are
+heavily imbalanced, so the two differ by several points. Papers occasionally
+report overall and the number looks anomalously high.
+
+**Office-31 is saturated.** Reported averages sit near the ceiling and the
+spread between methods is comparable to seed variance. Treat it as a sanity
+check rather than evidence of an advance.
+
+**DomainNet has two versions.** The full release contains substantial label
+noise; most work uses the cleaned subset, and some use only a 4-domain or
+7-task subset of it. A DomainNet number without the variant stated is not
+comparable to anything.
+
+**Source-free and source-available numbers are not interchangeable.** SFDA
+methods start from a model trained on source data and never see it again; UDA
+methods see both domains. Tables mixing the two exist, and the comparison
+flatters whichever side had more information.
+
 ### Image Classification
-- [Office-31](https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA) — 31 classes, 3 domains (Amazon, DSLR, Webcam)
-- [Office-Home](https://www.hemanthdv.org/officeHomeDataset.html) — 65 classes, 4 domains (Art, Clipart, Product, Real World)
-- [VisDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification) — 12 classes, synthetic-to-real
-- [DomainNet (cleaned)](http://ai.bu.edu/M3SDA/) — 345 classes, 6 domains (Clipart, Infograph, Painting, Quickdraw, Real, Sketch)
-- [PACS](https://domaingeneralization.github.io/) — 7 classes, 4 domains (Photo, Art, Cartoon, Sketch)
-- [Digits](http://yann.lecun.com/exdb/mnist/) — MNIST / USPS / SVHN cross-domain digit recognition
+
+| Dataset | Classes | Domains | Standard protocol |
+|---|---|---|---|
+| [Office-31](https://drive.google.com/file/d/0B4IapRTv9pJ1WGZVd1VDMmhwdlE/view?resourcekey=0-gNMHVtZfRAyO_t2_WrOunA) | 31 | 3 — Amazon, DSLR, Webcam | All 6 ordered pairs, averaged. ResNet-50. Saturated. |
+| [Office-Home](https://www.hemanthdv.org/officeHomeDataset.html) | 65 | 4 — Art, Clipart, Product, Real World | All 12 ordered pairs, averaged. ResNet-50. The current default. |
+| [VisDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification) | 12 | synthetic → real | Single direction. ResNet-101. **Per-class mean**, not overall. |
+| [DomainNet](http://ai.bu.edu/M3SDA/) | 345 | 6 — Clipart, Infograph, Painting, Quickdraw, Real, Sketch | Cleaned subset; state which domains and tasks. Hardest of the four. |
+| [PACS](https://domaingeneralization.github.io/) | 7 | 4 — Photo, Art, Cartoon, Sketch | Leave-one-domain-out. More common in domain generalization than SFDA. |
+| [Digits](http://yann.lecun.com/exdb/mnist/) | 10 | MNIST, USPS, SVHN | Usually 3 directions. Small, and largely superseded. |
 
 ### Robustness / Distribution Shift
 - [ImageNet-C](https://github.com/hendrycks/robustness) — 15 corruption types at 5 severity levels
