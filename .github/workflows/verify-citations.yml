@@ -2,7 +2,11 @@ name: Verify citations
 
 on:
   pull_request:
-    paths: ['README.md']
+    # scripts/** is included so a change to the verifier actually runs the
+    # verifier. Without it, a bug in the checking code could ship without the
+    # checking code ever executing, and would first surface by silently
+    # passing the next content PR.
+    paths: ['README.md', 'scripts/**', '.github/workflows/verify-citations.yml']
   workflow_dispatch:
   schedule:
     # Monthly sweep, in batches, to catch venue and link rot.
@@ -43,6 +47,19 @@ jobs:
           fi
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           cat report.md
+
+      - name: Smoke-test the verifier when it changes
+        # A verifier-only change selects no entries, so nothing would be
+        # exercised. Run a bounded sample instead, enough to prove the code
+        # path still works end to end.
+        if: steps.verify.outputs.exit_code == '0'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if grep -q 'No entries to verify' report.md 2>/dev/null; then
+            echo "No citations changed; smoke-testing the verifier itself."
+            python scripts/verify_citations.py --limit 8 --delay 2
+          fi
 
       - name: Comment the report on the pull request
         if: github.event_name == 'pull_request'
