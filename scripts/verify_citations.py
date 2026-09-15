@@ -37,6 +37,7 @@ Usage:
 """
 
 import argparse
+import html
 import json
 import os
 import re
@@ -136,6 +137,67 @@ def changed_lines_from_git(base, path):
     return lines
 
 
+# Matches a venue tag in either the current `Venue'YY` form or the older
+# (Venue YYYY) form, so a signature can be compared across the format change.
+ANY_VENUE_RE = re.compile(r"`(?P<v1>[^`']+)'(?P<y1>\d{2})`|\((?P<v2>[^()]+?)\s+(?P<y2>(?:19|20)\d{2})\)")
+ANY_URL_RE = re.compile(r"\((?P<url>https?://[^)\s]+)\)")
+# A star badge carries a github.com link target of its own. Left in, adding a
+# badge to an existing entry would look like a changed citation.
+BADGE_ANY_RE = re.compile(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)")
+BULLET_RE = re.compile(r"^-\s+(?P<rest>.+)$")
+
+
+def citation_signature(line):
+    """What a citation actually asserts, independent of how it is formatted.
+
+    Two lines with the same signature make the same factual claim, so a change
+    between them is cosmetic and does not need re-verification.
+    """
+    m = BULLET_RE.match(line)
+    if not m:
+        return None
+    line = BADGE_ANY_RE.sub("", line)
+    m = BULLET_RE.match(line)
+    if not m:
+        return None
+    urls = tuple(sorted(u for u in ANY_URL_RE.findall(line)
+                        if "img.shields.io" not in u))
+    if not urls:
+        return None
+    vm = ANY_VENUE_RE.search(line)
+    venue = ""
+    if vm:
+        if vm.group("v1"):
+            venue = "%s %s" % (vm.group("v1").strip(), vm.group("y1"))
+        else:
+            venue = "%s %s" % (vm.group("v2").strip(), vm.group("y2")[2:])
+    # Title with links, tags, badges and the venue stripped, so wording is
+    # compared but formatting is not. The venue must go too: in the older
+    # format it sat inside the title text, and leaving it there makes every
+    # entry look changed across the format migration.
+    text = ANY_URL_RE.sub("", m.group("rest"))
+    text = ANY_VENUE_RE.sub("", text)
+    text = re.sub(r"\[[^\]]*\]|`[^`]*`|!\[[^\]]*\]", "", text)
+    text = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    return (text, urls, venue)
+
+
+def unchanged_signatures(base, path):
+    """Citation signatures present in `path` at revision `base`."""
+    try:
+        old = subprocess.run(["git", "show", "%s:%s" % (base, path)],
+                             capture_output=True, text=True, check=True).stdout
+    except Exception as exc:
+        sys.stderr.write("could not read %s at %s: %s\n" % (path, base, exc))
+        return set()
+    sigs = set()
+    for line in old.splitlines():
+        sig = citation_signature(line)
+        if sig:
+            sigs.add(sig)
+    return sigs
+
+
 def fetch(url, timeout=30, accept=None):
     """Return (body, error_code).
 
@@ -217,7 +279,8 @@ def _arxiv_from_html(arxiv_id):
     if raw:
         m = CITATION_TITLE_RE.search(raw)
         if m:
-            return " ".join(m.group(1).decode("utf-8", "replace").split()), "ok"
+            title = html.unescape(m.group(1).decode("utf-8", "replace"))
+            return " ".join(title.split()), "ok"
         return None, "unchecked"
     return (None, "missing") if err == 404 else (None, "unchecked")
 
@@ -264,16 +327,28 @@ def crossref_by_doi(doi):
 
 
 def crossref_by_title(title):
-    raw, _ = fetch("https://api.crossref.org/works?rows=1"
-                   "&select=title,container-title,issued&query.bibliographic="
-                   + urllib.parse.quote(title), accept="application/json")
+    """Look a paper up by title, skipping non-article records.
+
+    Crossref registers supplementary material as its own record, with a title
+    derived from the paper's. Those rank highly and carry no venue, so taking
+    the first hit blindly can match a supplementary PDF and conclude the paper
+    has no venue. Only real works are considered.
+    """
+    raw, _ = fetch("https://api.crossref.org/works?rows=5"
+                   "&select=title,container-title,issued,type"
+                   "&query.bibliographic=" + urllib.parse.quote(title),
+                   accept="application/json")
     if not raw:
         return None, None, None
     try:
         items = json.loads(raw)["message"]["items"]
     except Exception:
         return None, None, None
-    return _crossref_fields(items[0]) if items else (None, None, None)
+    for it in items:
+        if it.get("type") == "component":
+            continue
+        return _crossref_fields(it)
+    return None, None, None
 
 
 def _crossref_fields(msg):
@@ -286,6 +361,52 @@ def _crossref_fields(msg):
             year = int(parts[0][0])
             break
     return (" ".join(title.split()) if title else None), container, year
+
+
+PROCEEDINGS_HOSTS = ("openaccess.thecvf.com", "proceedings.mlr.press",
+                     "papers.nips.cc", "proceedings.neurips.cc",
+                     "ecva.net", "ojs.aaai.org", "ijcai.org")
+# openaccess.thecvf.com/content/CVPR2022/... and the older
+# openaccess.thecvf.com/content_CVPR_2020/... both name the venue and year.
+CVF_URL_RE = re.compile(r"thecvf\.com/content[_/](?P<venue>[A-Za-z]+)_?(?P<year>(?:19|20)\d{2})", re.I)
+CITATION_DATE_RE = re.compile(br'<meta name="citation_(?:publication_date|date)" content="(\d{4})')
+TRAILING_ACRONYM_RE = re.compile(r"\s*\([^()]{1,24}\)\s*$")
+
+
+def strip_trailing_acronym(title):
+    """Remove a trailing model name, e.g. 'Contrastive TTA (AdaContrast)'.
+
+    Entries often append the method's short name, which no bibliographic record
+    carries, so it has to go before any title comparison.
+    """
+    return TRAILING_ACRONYM_RE.sub("", title).strip()
+
+
+def resolve_proceedings(url):
+    """Return (title, venue, year, status) from an official proceedings page.
+
+    These pages publish citation metadata in their head. status is 'ok',
+    'missing' when the page is gone, or 'unchecked' when it cannot be read.
+    """
+    raw, err = fetch(url)
+    if not raw:
+        return None, None, None, ("missing" if err == 404 else "unchecked")
+    m = CITATION_TITLE_RE.search(raw)
+    if not m:
+        return None, None, None, "unchecked"
+    title = html.unescape(m.group(1).decode("utf-8", "replace"))
+    title = " ".join(title.split())
+
+    venue = year = None
+    u = CVF_URL_RE.search(url)
+    if u:
+        venue = u.group("venue").upper()
+        year = int(u.group("year"))
+    else:
+        d = CITATION_DATE_RE.search(raw)
+        if d:
+            year = int(d.group(1))
+    return title, venue, year, "ok"
 
 
 def check_github(owner, repo):
@@ -407,7 +528,33 @@ def verify(entries, delay=1.0, check_venues=True, progress_every=0):
             # instead. Without this branch such entries were checked by nothing
             # at all and still counted as passing, which is the worst outcome a
             # verifier can produce.
-            lookup = resolved_title or e.title
+            lookup = strip_trailing_acronym(resolved_title or e.title)
+
+            # An official proceedings page is a primary source and states the
+            # title outright, so prefer it to a fuzzy bibliographic search.
+            if any(h in paper_url for h in PROCEEDINGS_HOSTS):
+                ptitle, pvenue, pyear, pstatus = resolve_proceedings(paper_url)
+                time.sleep(delay)
+                if pstatus == "missing":
+                    findings.append(Finding("fail", label,
+                        "proceedings page does not exist: %s" % paper_url))
+                    continue
+                if pstatus == "ok":
+                    resolved_title = resolved_title or ptitle
+                    findings.append(Finding("info", label, "resolved: " + ptitle))
+                    if norm(strip_trailing_acronym(e.title)) != norm(ptitle):
+                        findings.append(Finding("warn", label,
+                            "entry title differs from the proceedings page: '%s'"
+                            % ptitle))
+                    if pvenue and e.venue and pvenue != e.venue.upper():
+                        findings.append(Finding("warn", label,
+                            "entry says %s but the proceedings URL says %s"
+                            % (e.venue, pvenue)))
+                    if pyear and e.year and abs(pyear - e.year) > 1:
+                        findings.append(Finding("warn", label,
+                            "entry says %d but the page says %d" % (e.year, pyear)))
+                    continue
+
             found, container, year = crossref_by_title(lookup)
             time.sleep(delay)
             if found and norm(found) == norm(lookup):
@@ -476,8 +623,22 @@ def main():
     if args.only:
         entries = [e for e in entries if args.only.lower() in e.title.lower()]
     if args.diff_base:
-        wanted = changed_lines_from_git(args.diff_base, args.readme)
-        entries = [e for e in entries if e.line_no in wanted] if wanted else []
+        # Select by what the citation asserts, not by which lines moved. A
+        # reformatting pass changes every line while changing no citation, and
+        # re-verifying the whole list for that is slow enough that people
+        # eventually turn the check off.
+        known = unchanged_signatures(args.diff_base, args.readme)
+        lines = text.splitlines()
+        keep = []
+        for e in entries:
+            sig = citation_signature(lines[e.line_no - 1])
+            if sig is None or sig not in known:
+                keep.append(e)
+        skipped = len(entries) - len(keep)
+        if skipped:
+            sys.stderr.write("%d entries unchanged since %s - not re-verified\n"
+                             % (skipped, args.diff_base[:8]))
+        entries = keep
     if args.limit:
         entries = entries[:args.limit]
 
