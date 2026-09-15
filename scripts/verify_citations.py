@@ -13,6 +13,7 @@ What this catches:
   * A venue tag that disagrees with the Crossref record for that paper,
     including a main-conference tag on a workshop paper.
   * A code repository that no longer exists.
+  * An entry nothing could identify, which is reported rather than passed over.
   * A publication year that disagrees with the record by more than one
     (early access routinely shifts a year, so only larger gaps are reported).
 
@@ -22,7 +23,7 @@ What this cannot catch:
 
 Entry format understood by this script:
 
-    - Title of the paper (Venue YYYY) [[paper](url)] [[code](url)]
+    - Title of the paper [`paper`](url) [`code`](url) `Venue'YY`
 
 Exit codes:
   0  no hard failures
@@ -101,10 +102,10 @@ DOMAIN_TERMS = (
 UA = ("really-awesome-sfda-verifier/1.0 "
       "(+https://github.com/PrasannaPulakurthi/really-awesome-sfda)")
 
-# - Title of the paper (Venue YYYY) [[paper](url)] [[code](url)]
-ENTRY_RE = re.compile(r"^-\s+(?P<title>.+?)\s+\((?P<venue>[^()]+?)\s+(?P<year>(19|20)\d{2})\)")
-BARE_ENTRY_RE = re.compile(r"^-\s+(?P<title>.+?)\s*\[\[")
-LINK_RE = re.compile(r"\[\[(?P<label>[^\]]+)\]\((?P<url>[^)]+)\)\]")
+# - Title of the paper [`paper`](url) [`code`](url) `Venue'YY`
+TITLE_RE = re.compile(r"^-\s+(?P<title>.+?)\s*\[`")
+VENUE_TAG_RE = re.compile(r"`(?P<venue>[^`']+)'(?P<yy>\d{2})`")
+LINK_RE = re.compile(r"\[`(?P<label>[^`]+)`\]\((?P<url>[^)]+)\)")
 ARXIV_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/(?P<id>\d{4}\.\d{4,5})", re.I)
 DOI_RE = re.compile(r"(?:doi\.org/|/doi/(?:abs/|full/)?)(?P<doi>10\.\d{4,9}/[^\s)\"<>\]]+)", re.I)
 GITHUB_RE = re.compile(r"github\.com/(?P<owner>[\w.-]+)/(?P<repo>[\w.-]+)", re.I)
@@ -199,16 +200,15 @@ def parse_entries(text):
         links = {m.group("label").lower(): m.group("url") for m in LINK_RE.finditer(line)}
         if not links:
             continue
-        m = ENTRY_RE.match(line)
-        if m:
-            e = Entry(m.group("title").strip(), m.group("venue").strip(),
-                      int(m.group("year")), i, links)
-        else:
-            b = BARE_ENTRY_RE.match(line)
-            if not b:
-                continue
-            e = Entry(b.group("title").strip(), "", 0, i, links)
-        entries.append(e)
+        tm = TITLE_RE.match(line)
+        if not tm:
+            continue
+        venue, year = "", 0
+        vm = VENUE_TAG_RE.search(line)
+        if vm:
+            venue = vm.group("venue").strip()
+            year = 2000 + int(vm.group("yy"))
+        entries.append(Entry(tm.group("title").strip(), venue, year, i, links))
     return entries
 
 
@@ -329,11 +329,27 @@ def venue_matches(venue, container):
     return any(a in c for a in accept)
 
 
-def verify(entries, delay=1.0, check_venues=True):
+def verify(entries, delay=1.0, check_venues=True, progress_every=0):
+    """Check each entry, optionally reporting progress to stderr as it goes.
+
+    A full sweep takes minutes. Without progress output there is no way to
+    distinguish a slow run from a stalled one, and no way to see problems
+    accumulating before the end.
+    """
     findings = []
     seen = {}
-    for e in entries:
+    total = len(entries)
+    for idx, e in enumerate(entries, start=1):
         label = "%s (line %d)" % (e.title[:58], e.line_no)
+        if progress_every and (idx % progress_every == 0 or idx == total):
+            counts = {}
+            for f in findings:
+                counts[f.level] = counts.get(f.level, 0) + 1
+            sys.stderr.write(
+                "PROGRESS %d/%d | %d fail, %d warn, %d unverified\n"
+                % (idx, total, counts.get("fail", 0), counts.get("warn", 0),
+                   counts.get("unchecked", 0)))
+            sys.stderr.flush()
 
         paper_url = e.links.get("paper") or e.links.get("arxiv") or e.links.get("pdf")
         if not paper_url:
@@ -384,18 +400,34 @@ def verify(entries, delay=1.0, check_venues=True):
                     findings.append(Finding("warn", label,
                         "entry says %d but the record says %d" % (e.year, year)))
 
-        elif (check_venues and resolved_title and e.venue
-              and e.venue not in UNINDEXED_VENUES and e.venue in VENUE_PATTERNS):
-            found, container, year = crossref_by_title(resolved_title)
+        elif check_venues:
+            # No arXiv id and no DOI in the URL. Most links of this kind are
+            # proceedings pages (CVF, IEEE Xplore, Springer, MLR) that carry no
+            # identifier in the path, so the paper is looked up by its title
+            # instead. Without this branch such entries were checked by nothing
+            # at all and still counted as passing, which is the worst outcome a
+            # verifier can produce.
+            lookup = resolved_title or e.title
+            found, container, year = crossref_by_title(lookup)
             time.sleep(delay)
-            if found and norm(found) == norm(resolved_title) and container:
-                ok = venue_matches(e.venue, container)
-                if ok is False:
+            if found and norm(found) == norm(lookup):
+                resolved_title = resolved_title or found
+                if container:
+                    ok = venue_matches(e.venue, container)
+                    if ok is False:
+                        findings.append(Finding("warn", label,
+                            "entry says %s but the record says '%s' (%s)"
+                            % (e.venue, container, year)))
+                    else:
+                        findings.append(Finding("info", label,
+                            "venue record: %s (%s)" % (container, year)))
+                if year and e.year and abs(year - e.year) > 1:
                     findings.append(Finding("warn", label,
-                        "entry says %s but Crossref lists '%s' (%s)" % (e.venue, container, year)))
-                elif ok:
-                    findings.append(Finding("info", label,
-                        "venue confirmed: %s (%s)" % (container, year)))
+                        "entry says %d but the record says %d" % (e.year, year)))
+            elif not resolved_title:
+                # Nothing identified this paper. Say so rather than stay silent.
+                findings.append(Finding("unchecked", label,
+                    "no identifier and no title match - NOT verified"))
 
         code_url = e.links.get("code")
         if code_url:
@@ -414,6 +446,17 @@ def verify(entries, delay=1.0, check_venues=True):
 
 
 def main():
+    # Paper titles contain mathematical symbols and accented characters. On a
+    # console whose default encoding cannot represent them (cp1252 on Windows),
+    # printing a result raises UnicodeEncodeError and kills the run partway -
+    # leaving partial output that reads like a clean pass. Force UTF-8 so a
+    # stray glyph cannot silently truncate an audit.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except AttributeError:  # Python < 3.7
+            pass
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--readme", default="README.md")
     ap.add_argument("--only")
@@ -421,6 +464,8 @@ def main():
     ap.add_argument("--no-venues", action="store_true")
     ap.add_argument("--delay", type=float, default=1.0)
     ap.add_argument("--markdown", action="store_true")
+    ap.add_argument("--progress-every", type=int, default=0,
+                    help="report progress to stderr every N entries")
     ap.add_argument("--limit", type=int, default=0,
                     help="verify at most N entries (0 = no limit)")
     args = ap.parse_args()
@@ -441,7 +486,8 @@ def main():
         return 0
 
     sys.stderr.write("Verifying %d entries...\n" % len(entries))
-    findings = verify(entries, delay=args.delay, check_venues=not args.no_venues)
+    findings = verify(entries, delay=args.delay, check_venues=not args.no_venues,
+                      progress_every=args.progress_every)
 
     fails = [f for f in findings if f.level == "fail"]
     warns = [f for f in findings if f.level == "warn"]
