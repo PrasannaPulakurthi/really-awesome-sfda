@@ -1,0 +1,45 @@
+name: Link check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check internal anchor links
+        run: python scripts/check_anchors.py
+      - name: Check external links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-concurrency 8
+            --timeout 30
+            --retry-wait-time 10
+            --max-retries 2
+            --accept 200,206,429
+            --exclude-path .github
+            './*.md'
+          fail: false
+      - name: Open an issue if links are broken
+        if: env.lychee_exit_code != 0 && github.event_name == 'schedule'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Broken links found in the monthly check
+          content-filepath: ./lychee/out.md
+          labels: correction, automated

@@ -1,0 +1,63 @@
+name: Add a paper
+description: Suggest a paper for the list
+title: "[Add] <Paper title>"
+labels: ["new-entry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This list is comprehensive rather than selective — a paper is not
+        rejected for appearing at a smaller venue. What matters is that the
+        citation is accurate.
+  - type: input
+    id: title
+    attributes:
+      label: Full paper title
+    validations: {required: true}
+  - type: input
+    id: venue
+    attributes:
+      label: Venue and year
+      description: Use the published venue where one exists, otherwise arXiv. Verify from a primary source.
+      placeholder: CVPR 2025
+    validations: {required: true}
+  - type: input
+    id: paper
+    attributes:
+      label: Paper URL
+      description: Publisher page, proceedings listing, or arXiv abstract.
+    validations: {required: true}
+  - type: input
+    id: code
+    attributes:
+      label: Code URL
+      description: Leave blank if none. Please include it where a repository exists.
+  - type: dropdown
+    id: section
+    attributes:
+      label: Which section
+      options:
+        - Surveys & Theory
+        - Image Classification
+        - Object Detection
+        - Semantic Segmentation
+        - Remote Sensing
+        - 3D / Point Cloud
+        - Medical Imaging
+        - Video / Action Recognition
+        - Person Re-Identification
+        - Other application
+        - Test-Time Adaptation
+        - Open-Set / Continual / Federated / Multi-Source
+        - Foundation Models / VLM-based
+        - Other setting or extension
+    validations: {required: true}
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I verified the venue and year from a primary source
+          required: true
+        - label: I checked the paper is not already listed
+          required: true
