@@ -327,16 +327,28 @@ def crossref_by_doi(doi):
 
 
 def crossref_by_title(title):
-    raw, _ = fetch("https://api.crossref.org/works?rows=1"
-                   "&select=title,container-title,issued&query.bibliographic="
-                   + urllib.parse.quote(title), accept="application/json")
+    """Look a paper up by title, skipping non-article records.
+
+    Crossref registers supplementary material as its own record, with a title
+    derived from the paper's. Those rank highly and carry no venue, so taking
+    the first hit blindly can match a supplementary PDF and conclude the paper
+    has no venue. Only real works are considered.
+    """
+    raw, _ = fetch("https://api.crossref.org/works?rows=5"
+                   "&select=title,container-title,issued,type"
+                   "&query.bibliographic=" + urllib.parse.quote(title),
+                   accept="application/json")
     if not raw:
         return None, None, None
     try:
         items = json.loads(raw)["message"]["items"]
     except Exception:
         return None, None, None
-    return _crossref_fields(items[0]) if items else (None, None, None)
+    for it in items:
+        if it.get("type") == "component":
+            continue
+        return _crossref_fields(it)
+    return None, None, None
 
 
 def _crossref_fields(msg):
