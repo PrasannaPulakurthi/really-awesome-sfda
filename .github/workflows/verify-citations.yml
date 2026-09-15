@@ -1,0 +1,71 @@
+name: Verify citations
+
+on:
+  pull_request:
+    paths: ['README.md']
+  workflow_dispatch:
+  schedule:
+    # Monthly sweep, in batches, to catch venue and link rot.
+    - cron: '0 7 1 * *'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify changed entries
+        id: verify
+        env:
+          # Raises the GitHub API limit from 60/hr to 1000/hr so repository
+          # checks are actually performed rather than skipped as rate limited.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set +e
+          if [ -n "$BASE_REF" ]; then
+            python scripts/verify_citations.py \
+              --diff-base "$BASE_REF" --markdown --delay 2 > report.md
+          else
+            # A full sweep of 230+ entries would exceed the job limit, so the
+            # scheduled run checks a capped batch rather than everything.
+            python scripts/verify_citations.py \
+              --limit 60 --markdown --delay 2 > report.md
+          fi
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat report.md
+
+      - name: Comment the report on the pull request
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: citation-verification
+          path: report.md
+
+      - name: Upload the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: citation-report
+          path: report.md
+          if-no-files-found: ignore
+
+      - name: Fail if any citation could not be substantiated
+        if: steps.verify.outputs.exit_code == '1'
+        run: |
+          echo "::error::Citation verification found unsubstantiated entries."
+          echo "This means one of:"
+          echo "  - an identifier does not exist, or resolves to a different work"
+          echo "  - a linked repository does not exist"
+          echo "  - no source could confirm an identifier, so it was not verified"
+          echo "See the report comment on the pull request for which entries."
+          exit 1
