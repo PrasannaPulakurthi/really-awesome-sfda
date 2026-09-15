@@ -1,6 +1,27 @@
 # Awesome Source‑Free Domain Adaptation (SFDA) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-Curated resources for Source‑Free Domain Adaptation (SFDA): methods that adapt using only a trained source model (no source data). Includes papers, code, datasets, benchmarks, and tutorials.
+[![Verify citations](https://github.com/PrasannaPulakurthi/really-awesome-sfda/actions/workflows/verify-citations.yml/badge.svg)](https://github.com/PrasannaPulakurthi/really-awesome-sfda/actions/workflows/verify-citations.yml)
+[![Link check](https://github.com/PrasannaPulakurthi/really-awesome-sfda/actions/workflows/link-check.yml/badge.svg)](https://github.com/PrasannaPulakurthi/really-awesome-sfda/actions/workflows/link-check.yml)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+**Source-free domain adaptation** adapts a model to a new domain using only the
+trained source model — no source data, because it is often private, proprietary
+or simply too large to ship. This list covers SFDA and its neighbours:
+test-time adaptation, open-set and continual variants, federated settings, and
+the applications they are actually deployed in.
+
+**Every citation here is machine-verified.** Each pull request resolves the
+entry's identifiers against publisher records — arXiv, Crossref, and the
+proceedings pages of CVF, PMLR, NeurIPS, AAAI and IJCAI — and checks that the
+venue, the year and the linked repository all match what the record says. An
+entry nothing can confirm is reported as unverified rather than quietly
+accepted. Wrong venues and dead links are the usual failure of a paper list, and
+this one is built to catch them.
+
+Papers are listed newest first, tagged with venue and year, and linked to code
+wherever it exists.
+
 <!--lint disable awesome-github repo-url -->
 
 ## Contents
