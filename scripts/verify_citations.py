@@ -409,6 +409,34 @@ def resolve_proceedings(url):
     return title, venue, year, "ok"
 
 
+# icml.cc, neurips.cc and iclr.cc publish a virtual-site page per paper. They
+# carry no citation metadata, but the URL states the year and the page title is
+# "<CONF> Poster <paper title>", which is enough to confirm both. Crossref does
+# not index PMLR, so for ICML this is often the only machine-readable source.
+CONF_SITE_RE = re.compile(r"(?P<conf>icml|neurips|iclr)\.cc/virtual/(?P<year>(?:19|20)\d{2})/", re.I)
+HTML_TITLE_RE = re.compile(br"<title>\s*(?P<title>[^<]{3,300}?)\s*</title>", re.I | re.S)
+CONF_PREFIX_RE = re.compile(r"^(ICML|NeurIPS|ICLR)\s+(Poster|Oral|Spotlight|Session)\s+", re.I)
+CONF_NAMES = {"icml": "ICML", "neurips": "NeurIPS", "iclr": "ICLR"}
+
+
+def resolve_conference_site(url):
+    """Return (title, venue, year, status) from a conference virtual-site page."""
+    m = CONF_SITE_RE.search(url)
+    if not m:
+        return None, None, None, "unchecked"
+    raw, err = fetch(url)
+    if not raw:
+        return None, None, None, ("missing" if err == 404 else "unchecked")
+    tm = HTML_TITLE_RE.search(raw)
+    if not tm:
+        return None, None, None, "unchecked"
+    title = html.unescape(tm.group("title").decode("utf-8", "replace"))
+    title = CONF_PREFIX_RE.sub("", " ".join(title.split())).strip()
+    if not title:
+        return None, None, None, "unchecked"
+    return title, CONF_NAMES[m.group("conf").lower()], int(m.group("year")), "ok"
+
+
 def check_github(owner, repo):
     """Return (stars, status) where status is 'ok', 'missing' or 'unchecked'."""
     raw, err = fetch("https://api.github.com/repos/%s/%s" % (owner, repo))
@@ -529,6 +557,27 @@ def verify(entries, delay=1.0, check_venues=True, progress_every=0):
             # at all and still counted as passing, which is the worst outcome a
             # verifier can produce.
             lookup = strip_trailing_acronym(resolved_title or e.title)
+
+            # A conference's own virtual site is a primary source, and for ICML
+            # it is often the only machine-readable one, since Crossref does not
+            # index PMLR.
+            if CONF_SITE_RE.search(paper_url):
+                ctitle, cvenue, cyear, cstatus = resolve_conference_site(paper_url)
+                time.sleep(delay)
+                if cstatus == "ok":
+                    resolved_title = resolved_title or ctitle
+                    findings.append(Finding("info", label, "resolved: " + ctitle))
+                    if norm(strip_trailing_acronym(e.title)) != norm(ctitle):
+                        findings.append(Finding("warn", label,
+                            "entry title differs from the conference page: '%s'" % ctitle))
+                    if cvenue and e.venue and cvenue.upper() != e.venue.upper():
+                        findings.append(Finding("warn", label,
+                            "entry says %s but the page is on the %s site"
+                            % (e.venue, cvenue)))
+                    if cyear and e.year and abs(cyear - e.year) > 1:
+                        findings.append(Finding("warn", label,
+                            "entry says %d but the page says %d" % (e.year, cyear)))
+                    continue
 
             # An official proceedings page is a primary source and states the
             # title outright, so prefer it to a fuzzy bibliographic search.
