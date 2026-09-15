@@ -78,6 +78,8 @@ VENUE_PATTERNS = {
     "ESWA": (["expert systems with applications"], []),
     "KBS": (["knowledge-based systems"], []),
     "TKDE": (["transactions on knowledge and data engineering"], []),
+    "ICVGIP": (["indian conference on computer vision"], []),
+    "J. Supercomputing": (["journal of supercomputing"], []),
 }
 # Conference series Crossref indexes poorly or not at all; a venue mismatch
 # against these is unreliable, so the venue check is skipped rather than warned.

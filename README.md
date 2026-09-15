@@ -39,7 +39,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 
 ## Surveys & Theory
 - Vicinal Gaussian Transform: Rethinking Source-Free Domain Adaptation Through Source-Informed Label Consistency [`paper`](https://doi.org/10.1109/TPAMI.2025.3621631) `TPAMI'26`
-- CLIP-Powered Domain Generalization and Domain Adaptation: A Comprehensive Survey [`arxiv`](https://arxiv.org/abs/2504.14280) `arXiv'25`
+- CLIP-Powered Domain Generalization and Domain Adaptation: A Comprehensive Survey [`paper`](https://doi.org/10.1109/tpami.2026.3651700) [`arxiv`](https://arxiv.org/abs/2504.14280) `TPAMI'26`
 - Unraveling the Mysteries of Label Noise in Source-Free Domain Adaptation: Theory and Practice [`paper`](https://doi.org/10.1109/tpami.2025.3536845) [`code`](https://github.com/xugezheng/labelNoiseInSFDA) `TPAMI'25` [![Stars](https://img.shields.io/github/stars/xugezheng/labelNoiseInSFDA?style=social)](https://github.com/xugezheng/labelNoiseInSFDA)
 - A Comprehensive Survey on Source-Free Domain Adaptation [`paper`](https://ieeexplore.ieee.org/document/10452835) [`arxiv`](https://arxiv.org/abs/2302.11803) `TPAMI'24`
 - Understanding and Improving Source-free Domain Adaptation from a Theoretical Perspective [`paper`](https://openaccess.thecvf.com/content/CVPR2024/html/Mitsuzumi_Understanding_and_Improving_Source-free_Domain_Adaptation_from_a_Theoretical_Perspective_CVPR_2024_paper.html) [`code`](https://github.com/nttcslab/improved_sfda) `CVPR'24` [![Stars](https://img.shields.io/github/stars/nttcslab/improved_sfda?style=social)](https://github.com/nttcslab/improved_sfda)
@@ -71,7 +71,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - Revisiting Source-Free Domain Adaptation: a New Perspective via Uncertainty Control [`paper`](https://openreview.net/pdf?id=nx9Z5Kva96) [`code`](https://github.com/xugezheng/UCon_SFDA) `ICLR'25` [![Stars](https://img.shields.io/github/stars/xugezheng/UCon_SFDA?style=social)](https://github.com/xugezheng/UCon_SFDA)
 - Revisiting Source-Free Domain Adaptation: Insights into Representativeness, Generalization, and Variety [`paper`](https://openaccess.thecvf.com/content/CVPR2025/html/Zhu_Revisiting_Source-Free_Domain_Adaptation_Insights_into_Representativeness_Generalization_and_Variety_CVPR_2025_paper.html) `CVPR'25`
 - Shuffle PatchMix Augmentation with Confidence-Margin Weighted Pseudo-Labels for Enhanced Source-Free Domain Adaptation [`paper`](https://ieeexplore.ieee.org/document/11084606) [`arxiv`](https://arxiv.org/abs/2505.24216) [`code`](https://github.com/PrasannaPulakurthi/SPM) `ICIP'25` [![Stars](https://img.shields.io/github/stars/PrasannaPulakurthi/SPM?style=social)](https://github.com/PrasannaPulakurthi/SPM)
-- Source-Free Domain Adaptation via Multi-view Contrastive Learning [`arxiv`](https://arxiv.org/abs/2507.03321) `arXiv'25`
+- Source-Free Domain Adaptation via Multi-view Contrastive Learning [`paper`](https://doi.org/10.1007/s11227-026-08460-2) [`arxiv`](https://arxiv.org/abs/2507.03321) `J. Supercomputing'26`
 - What Has Been Overlooked in Contrastive Source-Free Domain Adaptation: Leveraging Source-Informed Latent Augmentation within Neighborhood Context [`arxiv`](https://arxiv.org/abs/2412.14301) `ICLR'25`
 - Aligning Non-Causal Factors for Transformer-Based Source-Free Domain Adaptation [`paper`](https://openaccess.thecvf.com/content/WACV2024/html/Sanyal_Aligning_Non-Causal_Factors_for_Transformer-Based_Source-Free_Domain_Adaptation_WACV_2024_paper.html) `WACV'24`
 - GALA: Graph Diffusion-based Alignment with Jigsaw for Source-free Domain Adaptation [`paper`](https://ieeexplore.ieee.org/document/10561561) `TPAMI'24`
@@ -140,11 +140,11 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 ### Remote Sensing
 - Machine Unlearning for Source-Free Unsupervised Partial-Domain Adaptation in Remote Sensing [`paper`](https://doi.org/10.1109/TGRS.2025.3637240) `TGRS'25`
 - Multi-level domain perturbation for source-free object detection in remote sensing images [`paper`](https://doi.org/10.1080/10095020.2024.2378920) `Geo-spatial Information Science'25`
-- Prototype-Based Pseudo-Label Denoising for Source-Free Domain Adaptation in Remote Sensing Semantic Segmentation [`arxiv`](https://arxiv.org/abs/2509.16942) `arXiv'25`
+- Prototype-Based Pseudo-Label Denoising for Source-Free Domain Adaptation in Remote Sensing Semantic Segmentation [`paper`](https://doi.org/10.1109/icassp55912.2026.11464091) [`arxiv`](https://arxiv.org/abs/2509.16942) `ICASSP'26`
 - Source-Free Cross-Domain Scene Classification of Remote Sensing Images via Statistics Matching and Noise Adaptation [`paper`](https://doi.org/10.1109/TGRS.2025.3590697) `TGRS'25`
 - Source-Free Domain Adaptation for Remote Sensing Object Detection Using Low-Confidence Pseudolabels [`paper`](https://doi.org/10.1109/LGRS.2025.3557816) `GRSL'25`
-- Source-Free Domain Adaptive Semantic Segmentation of Remote Sensing Images with Diffusion-Guided Label Enrichment [`arxiv`](https://arxiv.org/abs/2509.18502) `arXiv'25`
-- VFM-Guided Semi-Supervised Detection Transformer under Source-Free Constraints for Remote Sensing Object Detection [`arxiv`](https://arxiv.org/abs/2508.11167) `arXiv'25`
+- Source-Free Domain Adaptive Semantic Segmentation of Remote Sensing Images with Diffusion-Guided Label Enrichment [`paper`](https://doi.org/10.1109/jstars.2026.3693002) [`arxiv`](https://arxiv.org/abs/2509.18502) `JSTARS'26`
+- VFM-Guided Semi-Supervised Detection Transformer under Source-Free Constraints for Remote Sensing Object Detection [`paper`](https://doi.org/10.1109/jstars.2026.3689075) [`arxiv`](https://arxiv.org/abs/2508.11167) `JSTARS'26`
 
 ### Landmine Detection
 - SULAND v2: A Refined RGB Dataset and Deep Learning Object Detection Benchmark for UAV/UGV-Based SUrface LANDmine Detection Under Domain Shift [`arxiv`](https://arxiv.org/abs/2607.28996) [`dataset`](https://huggingface.co/datasets/SagarLekhak/SULAND_v2_RGB_Surface_Landmine_Dataset) [`code`](https://github.com/PrasannaPulakurthi/SULAND_v2) `arXiv'26` [![Stars](https://img.shields.io/github/stars/PrasannaPulakurthi/SULAND_v2?style=social)](https://github.com/PrasannaPulakurthi/SULAND_v2)
@@ -165,7 +165,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - Zero-LEAD: Source-Free Universal Domain Adaptation for Abdominal Multi-Organ Segmentation [`paper`](https://openaccess.thecvf.com/content/WACV2026/html/El-Sayed_Zero-LEAD_Source-Free_Universal_Domain_Adaptation_for_Abdominal_Multi-Organ_Segmentation_WACV_2026_paper.html) `WACV'26`
 - Active Source-Free Cross-Domain and Cross-Modality Adaptation for Volumetric Medical Image Segmentation by Image Sensitivity and Organ Heterogeneity Sampling [`paper`](https://doi.org/10.1007/978-3-032-04978-0_1) `MICCAI'25`
 - AIF-SFDA: Autonomous Information Filter-driven Source-Free Domain Adaptation for Medical Image Segmentation [`arxiv`](https://arxiv.org/abs/2501.03074) [`code`](https://github.com/JingHuaMan/AIF-SFDA) `AAAI'25` [![Stars](https://img.shields.io/github/stars/JingHuaMan/AIF-SFDA?style=social)](https://github.com/JingHuaMan/AIF-SFDA)
-- Aligning What You Separate: Denoised Patch Mixing for Source-Free Domain Adaptation in Medical Image Segmentation [`arxiv`](https://arxiv.org/abs/2510.25227) `arXiv'25`
+- Aligning What You Separate: Denoised Patch Mixing for Source-Free Domain Adaptation in Medical Image Segmentation [`paper`](https://doi.org/10.1109/icassp55912.2026.11463987) [`arxiv`](https://arxiv.org/abs/2510.25227) `ICASSP'26`
 - Continual source-free active domain adaptation for nasopharyngeal carcinoma tumor segmentation across multiple hospitals [`paper`](https://doi.org/10.1016/j.neunet.2025.107869) `Neural Networks'25`
 - DDFP: Data-dependent Frequency Prompt for Source Free Domain Adaptation of Medical Image Segmentation [`arxiv`](https://arxiv.org/abs/2505.09927) `arXiv'25`
 - Dual Knowledge-Aware Guidance for Source-Free Domain Adaptive Fundus Image Segmentation [`paper`](https://doi.org/10.1007/978-3-032-04978-0_18) `MICCAI'25`
@@ -236,7 +236,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 - Distill Once, Adapt Life-Long: Exploring Dataset Distillation for Continual Test-Time Adaptation [`arxiv`](https://arxiv.org/abs/2606.20196) `ECCV'26`
 - Source-Free Controlled Adaptation of Teachers for Continual Test-Time Adaptation [`arxiv`](https://arxiv.org/abs/2607.23735) `arXiv'26`
 - TestMate: Test-Time Domain Adaptation Aided by Lightweight Vision Foundation Model [`arxiv`](https://arxiv.org/abs/2607.03810) `arXiv'26`
-- Purge-Gate: Backpropagation-Free Test-Time Adaptation for Point Clouds Classification via Token Purging [`arxiv`](https://arxiv.org/abs/2509.09785) `arXiv'25`
+- Purge-Gate: Backpropagation-Free Test-Time Adaptation for Point Clouds Classification via Token Purging [`paper`](https://doi.org/10.1109/iccv51701.2025.02566) [`arxiv`](https://arxiv.org/abs/2509.09785) `ICCV'25`
 - SloMo-Fast: Slow-Momentum and Fast-Adaptive Teachers for Source-Free Continual Test-Time Adaptation [`arxiv`](https://arxiv.org/abs/2511.18468) `arXiv'25`
 - EcoTTA: Memory-Efficient Continual Test-Time Adaptation via Self-Distilled Regularization [`paper`](https://openaccess.thecvf.com/content/CVPR2023/html/Song_EcoTTA_Memory-Efficient_Continual_Test-Time_Adaptation_via_Self-Distilled_Regularization_CVPR_2023_paper.html) `CVPR'23`
 - Towards Stable Test-Time Adaptation in Dynamic Wild World (SAR) [`arxiv`](https://arxiv.org/abs/2302.12400) `ICLR'23`
@@ -263,7 +263,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 
 ### Continual / Class-Incremental SFDA
 - GMM-COMET: Continual Source-Free Universal Domain Adaptation via a Mean Teacher and Gaussian Mixture Model-Based Pseudo-Labeling [`arxiv`](https://arxiv.org/abs/2601.11161) `arXiv'26`
-- SCoDA: Self-supervised Continual Domain Adaptation [`arxiv`](https://arxiv.org/abs/2509.09935) `arXiv'25`
+- SCoDA: Self-supervised Continual Domain Adaptation [`paper`](https://doi.org/10.1145/3774521.3774553) [`arxiv`](https://arxiv.org/abs/2509.09935) `ICVGIP'25`
 - Multi-Granularity Class Prototype Topology Distillation for Class-Incremental Source-Free Unsupervised Domain Adaptation [`paper`](https://openaccess.thecvf.com/content/CVPR2025/html/Deng_Multi-Granularity_Class_Prototype_Topology_Distillation_for_Class-Incremental_Source-Free_Unsupervised_Domain_CVPR_2025_paper.html) [`arxiv`](https://arxiv.org/abs/2411.16064) `CVPR'25`
 - CoSDA: Continual Source-Free Domain Adaptation [`arxiv`](https://arxiv.org/abs/2304.06627) `ICLR'23`
 
@@ -288,7 +288,7 @@ Within each section, entries are sorted by year (descending) and then alphabetic
 ### Active SFDA
 - Energy-guided active source-free domain adaptation [`paper`](https://doi.org/10.1007/s11042-026-21692-x) `Multimedia Tools and Applications'26`
 - Active source-free domain adaptation for intracranial EEG classification via neighborhood uncertainty and diversity [`paper`](https://doi.org/10.1016/j.bspc.2024.107464) `Biomedical Signal Processing and Control'25`
-- DAM: Dual Active Learning with Multimodal Foundation Model for Source-Free Domain Adaptation [`arxiv`](https://arxiv.org/abs/2509.24896) `arXiv'25`
+- DAM: Dual Active Learning with Multimodal Foundation Model for Source-Free Domain Adaptation [`paper`](https://doi.org/10.1109/icassp55912.2026.11463823) [`arxiv`](https://arxiv.org/abs/2509.24896) `ICASSP'26`
 - Propensity-driven Uncertainty Learning for Sample Exploration in Source-Free Active Domain Adaptation [`arxiv`](https://arxiv.org/abs/2501.13517) `arXiv'25`
 - Source-Free Active Domain Adaptation via Augmentation-Based Sample Query and Progressive Model Adaptation [`paper`](https://doi.org/10.1109/TNNLS.2023.3338294) `TNNLS'25`
 - Structure-Based Uncertainty Estimation for Source-Free Active Domain Adaptation [`paper`](https://doi.org/10.1049/cvi2.70020) `IET Computer Vision'25`
